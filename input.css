@@ -1,0 +1,13 @@
+/* See https://daisyui.com/docs/install/standalone/#3-add-tailwind-css-and-daisyui for reference */
+
+@import "tailwindcss" source(none);
+@source "./**/*.{html,php,erb}";
+
+@plugin "./daisyui.js" {
+    themes: silk --default, dim --prefersdark;
+}
+
+/* Optional for custom themes – Docs: https://daisyui.com/docs/themes/#how-to-add-a-new-custom-theme */
+@plugin "./daisyui-theme.js" {
+    /* custom theme here */
+}

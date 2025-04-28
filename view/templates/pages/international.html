@@ -1,0 +1,30 @@
+{{ template "top" . }}
+
+{{ template "navbar" . }}
+<main>
+    <section class="flex flex-col items-center gap-3 py-4 sm:px-4 md:px-6 lg:px-8 xl:px-12">
+        <h2 class="text-4xl font-bold">International Plant Visits</h2>
+        <p class="text-center max-w-lg">I have previously participated in International Plant Visits to Japan that were
+            offered by
+            Mapúa
+            University’s International Career and Exchange Program. To be specific, I went to Tokyo in
+            February 2020 as a high school student, and Osaka/Kyoto in October 2023 as a college student to
+            take part in Mapúa’s pursuit of global competence.</p>
+        <div class="flex flex-wrap flex justify-center flex-wrap gap-3">
+            <div class="flex flex-col items-center">
+                <div class="w-xl pt-3 px-3">
+                    <img src="/static/images/Japan2020.webp" class="object-contain">
+                </div>
+                <h3 class="text-xl font-bold">Tokyo, Japan (February 2020)</h3>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-xl pt-3 px-3">
+                    <img src="/static/images/Japan2023.webp" class="object-contain">
+                </div>
+                <h3 class="text-xl font-bold">Osaka/Kyoto, Japan (October 2023)</h3>
+            </div>
+        </div>
+    </section>
+</main>
+
+{{ template "bottom" . }}

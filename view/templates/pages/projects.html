@@ -1,0 +1,46 @@
+{{ template "top" . }}
+
+{{ template "navbar" . }}
+
+<div class="flex justify-center flex-wrap gap-3 py-4 sm:px-4 md:px-6 lg:px-8 xl:px-12">
+    <template x-data="{ 
+        projects: null, 
+        async fetchProjects() {
+            if (localStorage.getItem('projects') === null || (Date.now() - localStorage.getItem('projectsLastRequestDate') ?? 0) > 600000) {
+                try {
+                    const response = await fetch('https://api.github.com/users/cedoromal/repos');
+                    if (!response.ok) {
+                        throw new Error(`Response status: ${response.status}`);
+                    }
+                    this.projects = await response.json();
+                    this.projects = this.projects.filter((project) => !project.archived)
+                    localStorage.setItem('projects', JSON.stringify(this.projects));
+                    localStorage.setItem('projectsLastRequestDate', Date.now());
+                } catch (err) {
+                    console.error(err.message);
+                    if (localStorage.getItem('projects') !== null) {
+                        this.projects = JSON.parse(localStorage.getItem('projects'));
+                    }
+                }
+            } else {
+                this.projects = JSON.parse(localStorage.getItem('projects'));
+            }
+        }
+    }" x-init="fetchProjects()" x-for="project in projects">
+        <div class="card card-compact w-72 bg-base-100 shadow-xl">
+            <figure x-data="{ image: null }"
+                x-init="image = 'https://picsum.photos/seed/' + project.id + '/300/100.webp'">
+                <img x-bind:src="image" />
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title" x-text="project.name"></h2>
+                <p x-text="project.description"></p>
+                <div class="card-actions justify-end">
+                    <a class="btn btn-soft btn-primary" x-bind:href="project.html_url">Go To Repository</a>
+                </div>
+            </div>
+        </div>
+    </template>
+</div>
+
+{{ template "bottom" . }}
