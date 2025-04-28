@@ -1,4 +1,4 @@
-const conn = new WebSocket("ws://" + document.location.host + "/live-reload");
+const conn = new WebSocket((document.location.protocol === "https" ? "wss" : "ws" + "://" + document.location.host + "/live-reload"));
 
 conn.onopen = () => {
     console.log("Connected")
